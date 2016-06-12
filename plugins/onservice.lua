@@ -1,9 +1,18 @@
+--[[ 
+▀▄ ▄▀▀▄▄▀▀▄▄▀▀▄▄▀▀▄▄▀▀▄▄▀▀▄▄▀▀▄▀▄▄▀▀▄▄▀▀▄▄▀▀▄▄▀▀          
+▀▄ ▄▀                                      ▀▄ ▄▀ 
+▀▄ ▄▀    BY Th3_BOOS                   ▀▄ ▄▀ 
+▀▄ ▄▀     BY Th3_BOOS (@Th3_BOOS)    ▀▄ ▄▀ 
+▀▄ ▄▀ JUST WRITED BY Th3_BOOS          ▀▄ ▄▀   
+▀▄ ▄▀     KICK BOT  : طرد البوت            ▀▄ ▄▀ 
+▀▄▀▀▄▄▀▀▄▄▀▄▄▀▀▄▄▀▀▄▄▀▄▄▀▀▄▄▀▀▄▄▀▄▄▀▀▄▄▀▀▄▄▀▄▄▀▀
+--]]
 do
--- Will leave the group if be added
+
 local function run(msg, matches)
 local bot_id = our_id 
 local receiver = get_receiver(msg)
-    if matches[1] == 'leave' and is_admin1(msg) then
+    if matches[1] == 'طرد البوت' and is_admin1(msg) then
        chat_del_user("chat#id"..msg.to.id, 'user#id'..bot_id, ok_cb, false)
 	   leave_channel(receiver, ok_cb, false)
     elseif msg.service and msg.action.type == "chat_add_user" and msg.action.user.id == tonumber(bot_id) and not is_admin1(msg) then
@@ -15,7 +24,7 @@ end
  
 return {
   patterns = {
-    "^(leave)$",
+    "^(طرد البوت)$",
     "^!!tgservice (.+)$",
   },
   run = run

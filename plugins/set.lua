@@ -1,7 +1,3 @@
---[[ ▄▇▇▇▇▇▇▄▇▇▇▇▇▇▄
-joker
-    ▄▇▇▇▇▇▇▄▇▇▇▇▇▇▄
-]] 
 local function save_value(msg, name, value)
   if (not name or not value) then
     return "Usage: !set var_name value"
@@ -29,7 +25,7 @@ end
 
 return {
   patterns = {
-   "^save ([^%s]+) (.+)$"
+   "^[#!/]save ([^%s]+) (.+)$"
   }, 
   run = run 
 }

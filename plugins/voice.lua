@@ -4,31 +4,28 @@
 ▀▄ ▄▀    BY Th3_BOOS                   ▀▄ ▄▀ 
 ▀▄ ▄▀     BY Th3_BOOS (@Th3_BOOS)    ▀▄ ▄▀ 
 ▀▄ ▄▀ JUST WRITED BY Th3_BOOS          ▀▄ ▄▀   
-▀▄ ▄▀          dev1  : dev                 ▀▄ ▄▀ 
+▀▄ ▄▀        voice  : صوت                  ▀▄ ▄▀ 
 ▀▄▀▀▄▄▀▀▄▄▀▄▄▀▀▄▄▀▀▄▄▀▄▄▀▀▄▄▀▀▄▄▀▄▄▀▀▄▄▀▀▄▄▀▄▄▀▀
 --]]
 do
-
-function run(msg, matches)
-return [[
-
-االبوت الذي يعمل على مجوعات السوبر 🔸
-
-يعمل البوت على مجموعات سوبر تصل الى5k عضو 🔷
-
-     ≪تم صنع البوت بواسطة المطور≫   
-                      『 @dev_hasoony』
-            
-]]
+local function run(msg, matches)
+  local url = "http://tts.baidu.com/text2audio?lan=en&ie=UTF-8&text="..matches[1]
+  local receiver = get_receiver(msg)
+  local file = download_to_file(url,'text.ogg')
+      send_audio('channel#id'..msg.to.id, file, ok_cb , false)
 end
+
 
 return {
-description = "Shows bot q", 
-usage = "spam Shows bot q",
-patterns = {
-"^مطور البوت$",
-"^([Dd]ev)$"
-},
-run = run 
+  description = "text to voice",
+  usage = {
+    "صوت [text]"
+  },
+  patterns = {
+    "^صوت (.+)$"
+  },
+  run = run
 }
+
 end
+

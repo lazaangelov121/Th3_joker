@@ -1,3 +1,11 @@
+--[[
+
+#
+#     @DevPointCH
+#   @MasterTeamCH
+#      
+
+]]
 do
 function run_bash(str)
     local cmd = io.popen(str)
@@ -49,12 +57,12 @@ function get_staticmap(area)
 end
 
 
-function run(msg, matches)
+function DevPoint(msg, matches)
 	local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
 	redis:incr(hash)
 	local receiver	= get_receiver(msg)
 	local city = matches[1]
-	if matches[1] == 'azan' then
+	if matches[1] == 'الاذان' then
 	city = 'Baghdad'
 	end
 	local lat,lng,url	= get_staticmap(city)
@@ -63,14 +71,14 @@ function run(msg, matches)
 	local code = http.request('http://api.aladhan.com/timings/'..dumptime..'?latitude='..lat..'&longitude='..lng..'&timezonestring=Asia/Baghdad&method=7')
 	local jdat = json:decode(code)
 	local data = jdat.data.timings
-	local text = '⛪️مدينة : '..city
-	  text = text..'\n🕌آذان الصبح: '..data.Fajr
-	  text = text..'\n🕌شروق الشمس: '..data.Sunrise
-	  text = text..'\n🕌آذان الظهر: '..data.Dhuhr
-	  text = text..'\n🕌الغروب: '..data.Sunset
-	  text = text..'\n🕌آذان المغرب: '..data.Maghrib
-	  text = text..'\n🕌آذان العشاء : '..data.Isha
-	  text = text..'\n\nchannel : @INSTAOFFICIAL'
+	local text = '🛣مدينة : '..city
+	  text = text..'\n🌃آذان الصبح: '..data.Fajr
+	  text = text..'\n🌄🌅شروق الشمس: '..data.Sunrise
+	  text = text..'\n🏖🏝آذان الظهر: '..data.Dhuhr
+	  text = text..'\n🌉الغروب: '..data.Sunset
+	  text = text..'\n🌌آذان المغرب: '..data.Maghrib
+	  text = text..'\n🌃آذان العشاء : '..data.Isha
+	  text = text..'\n\n#Dev : @Devss_bot'
 	if string.match(text, '0') then text = string.gsub(text, '0', '0') end
 	if string.match(text, '1') then text = string.gsub(text, '1', '1') end
 	if string.match(text, '2') then text = string.gsub(text, '2', '2') end
@@ -85,7 +93,7 @@ function run(msg, matches)
 end
 
 return {
-    patterns = {"^azan (.*)$","^(azan)$"},   
+    patterns = {"^الاذان (.*)$","^[/!](الاذان)$"},   
 
-    run =run }
+    run =DevPoint }
 end

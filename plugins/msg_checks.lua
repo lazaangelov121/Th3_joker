@@ -1,7 +1,7 @@
 --Begin msg_checks.lua
 --Begin pre_process function
 local function pre_process(msg)
--- Begin 'RondoMsgChecks' text checks by @rondoozle
+-- Begin 'RondoMsgChecks' text checks by @Th3_BOOS
 if is_chat_msg(msg) or is_super_group(msg) then
 	if msg and not is_momod(msg) and not is_whitelisted(msg.from.id) then --if regular user
 	local data = load_data(_config.moderation.data)
@@ -22,11 +22,6 @@ if is_chat_msg(msg) or is_super_group(msg) then
 		lock_rtl = settings.lock_rtl
 	else
 		lock_rtl = 'no'
-	end
-		if settings.lock_tgservice then
-		lock_tgservice = settings.lock_tgservice
-	else
-		lock_tgservice = 'no'
 	end
 	if settings.lock_link then
 		lock_link = settings.lock_link
@@ -81,15 +76,7 @@ if is_chat_msg(msg) or is_super_group(msg) then
 				if strict == "yes" or to_chat then
 					kick_user(msg.from.id, msg.to.id)
 				end
-		end
-		if msg.service then 
-			if lock_tgservice == "yes" then
-				delete_msg(msg.id, ok_cb, false)
-				if to_chat then
-					return
-				end
 			end
-		end
 			local is_squig_msg = msg.text:match("[\216-\219][\128-\191]")
 			if is_squig_msg and lock_arabic == "yes" then
 				delete_msg(msg.id, ok_cb, false)
@@ -286,7 +273,7 @@ if is_chat_msg(msg) or is_super_group(msg) then
 		end
 	end
 end
--- End 'RondoMsgChecks' text checks by @Rondoozle
+-- End 'RondoMsgChecks' text checks by @Th3_BOOS
 	return msg
 end
 --End pre_process function
@@ -295,4 +282,4 @@ return {
 	pre_process = pre_process
 }
 --End msg_checks.lua
---By @Rondoozle
+--By @Th3_BOOS
